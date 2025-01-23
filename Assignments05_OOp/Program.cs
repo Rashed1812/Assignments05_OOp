@@ -23,6 +23,39 @@
         {
             return username == storedUsername && role == storedRole;
         }
+    }
+
+    #endregion
+
+    #region Part03 Q3
+
+    public interface INotificationService
+    {
+        void SendNotification(string recipient, string message);
+    }
+
+    public class EmailNotificationService : INotificationService
+    {
+        public void SendNotification(string recipient, string message)
+        {
+            Console.WriteLine($"Email sent to {recipient}: {message}");
+        }
+    }
+
+    public class SmsNotificationService : INotificationService
+    {
+        public void SendNotification(string recipient, string message)
+        {
+            Console.WriteLine($"SMS sent to {recipient}: {message}");
+        }
+    }
+
+    public class PushNotificationService : INotificationService
+    {
+        public void SendNotification(string recipient, string message)
+        {
+            Console.WriteLine($"notification sent to {recipient}: {message}");
+        }
     } 
 
     #endregion
@@ -90,10 +123,25 @@
             else
             {
                 Console.WriteLine(" failed Inncorect UserName or Password.");
-            } 
+            }
 
             #endregion
 
+            #region Part02 Q3
+
+            INotificationService emailService = new EmailNotificationService();
+            emailService.SendNotification("abdelrahman@gmail.com", "email notification!");
+
+            // SMS Notification Service
+            INotificationService smsService = new SmsNotificationService();
+            smsService.SendNotification("01011845887", "SMS notification!");
+
+            // Push Notification Service
+            INotificationService pushService = new PushNotificationService();
+            pushService.SendNotification("Abdo", "push notification!");
+
+            Console.WriteLine("Notifications sent successfully!"); 
+            #endregion
 
         }
     }
